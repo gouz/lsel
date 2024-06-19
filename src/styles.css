@@ -17,28 +17,6 @@ body {
   margin: 0;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
-}
-
-.instrument {
-  width: 200px;
-  border: 1px solid #ccc;
-
-  button {
-    padding: 0;
-    width: 10px;
-    height: 10px;
-    border: 1px solid #ccc;
-  }
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
