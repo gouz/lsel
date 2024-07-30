@@ -71,7 +71,7 @@ const orchestra = [
   ],
   [
     "Vibraphone",
-    "Glockenspiel ",
+    "Glockenspiel",
     "Batterie",
     "Percussion 1",
     "Percussion 2",
@@ -85,4 +85,6 @@ document.body.append(canvas);
 
 const scene = await createScene(canvas);
 
-setupOrchestra(orchestra, scene);
+document.getElementById("start")?.addEventListener("click", () => {
+  setupOrchestra(orchestra, scene);
+});

@@ -4,6 +4,7 @@ import {
   StandardMaterial,
   Color3,
   DynamicTexture,
+  type Mesh,
 } from "@babylonjs/core";
 
 const createMusician = (
@@ -11,7 +12,7 @@ const createMusician = (
   dimension: { w: number; h: number; d: number },
   position: { x: number; y: number; z: number },
   scene: Scene,
-): void => {
+): Mesh => {
   const cubeMesh = MeshBuilder.CreateBox(
     "cube",
     {
@@ -44,6 +45,7 @@ const createMusician = (
   material.diffuseTexture = dynamicTexture;
 
   cubeMesh.material = material;
+  return cubeMesh;
 };
 
 export default createMusician;

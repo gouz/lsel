@@ -1,21 +1,61 @@
-import type { Scene } from "@babylonjs/core";
+import { Sound, Vector3, type Scene } from "@babylonjs/core";
 import createMusician from "./createMusician";
+
+let soundsReady = 0;
+let nbSoundToLoad = 0;
+const musics: Sound[] = [];
+const meshes: Mesh[] = [];
+
+const soundReady = () => {
+  soundsReady++;
+  console.log(soundsReady, nbSoundToLoad);
+  if (soundsReady === nbSoundToLoad) {
+    musics.forEach((m, _) => {
+      m.play();
+    });
+  }
+};
 
 const placeRow = (row: string[], radius: number, scene: Scene): void => {
   const step = Math.PI / row.length;
   row.forEach((musician, musician_index) => {
     const angle = musician_index * step;
-    createMusician(
+    const mesh = createMusician(
       musician,
       { w: 1, h: 1.5, d: 1 },
       { x: -Math.cos(angle) * radius, y: 0, z: Math.sin(angle) * radius },
       scene,
     );
+    const music = new Sound(
+      `${musician}_${musician_index}`,
+      `/songs/Children/Children-${musician.replace("♭", "b").replace(/ /g, "_")}.mp3`,
+      scene,
+      soundReady,
+      {
+        loop: false,
+        autoplay: false,
+        spatialSound: true,
+        distanceModel: "linear",
+        rolloffFactor: 1 / radius,
+        maxDistance: 10,
+        refDistance: 1,
+      },
+    );
+    meshes.push(mesh);
+    music.setDirectionalCone(90, 180, 0);
+    music.setLocalDirectionToMesh(new Vector3(0, 2, -4));
+    music.setPosition(mesh.position);
+    music.attachToMesh(mesh);
+    musics.push(music);
   });
 };
 
 const setupOrchestra = (orchestra: string[][], scene: Scene) => {
   let radius = 0;
+  nbSoundToLoad = 0;
+  orchestra.forEach((r, _) => {
+    nbSoundToLoad += r.length;
+  });
   orchestra.forEach((row, row_index) => {
     if (row_index === 0) {
       radius = (1.25 * (row.length + 1)) / Math.PI;
