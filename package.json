@@ -7,12 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "format": "bunx @biomejs/biome format ./ --write",
+    "lint": "bunx @biomejs/biome lint ./ --write"
   },
   "dependencies": {
+    "@babylonjs/core": "^7.17.2",
     "@tauri-apps/api": "^1",
     "@types/howler": "^2.2.11",
-    "howler": "^2.2.4",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {

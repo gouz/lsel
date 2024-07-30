@@ -1,12 +1,14 @@
-import MusicXML from "./MusicXML";
-import { Score } from "./MusicXML/types";
+import parseMusicXML from "./MusicXML";
 
-export const loadFile = async (file: string): Promise<string[]> => {
-  const response = await fetch(file);
-  const score: Score = MusicXML.parse(await response.text());
-  const result: string[] = [];
-  Object.entries(score.parts).forEach(([_, part]) => {
-    result.push(part.name);
+export const loadFile = async (file: string): Promise<string[]> =>
+  new Promise((resolve) => {
+    fetch(file)
+      .then((response) => response.text())
+      .then((text) => {
+        resolve(
+          Object.entries(parseMusicXML(text).parts).map(
+            ([_, part]) => part.name
+          )
+        );
+      });
   });
-  return result;
-};

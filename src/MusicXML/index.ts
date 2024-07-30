@@ -1,3 +1,3 @@
-import MusicXML from "./MusicXML";
+import parseMusicXML from "./parseMusicXML";
 
-export default MusicXML;
+export default parseMusicXML;
