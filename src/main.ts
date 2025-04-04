@@ -70,6 +70,7 @@ const orchestra = [
     "Alto Saxophone",
   ],
   [
+    "",
     "Vibraphone",
     "Glockenspiel",
     "Batterie",
@@ -77,6 +78,7 @@ const orchestra = [
     "Percussion 2",
     "Timbales",
     "Piano",
+    "",
   ],
 ];
 
